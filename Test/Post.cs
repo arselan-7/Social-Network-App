@@ -11,8 +11,7 @@ namespace Test
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,13 +21,8 @@ namespace Test
         }
     
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Veuillez écrire quelque chose avant de poster!")]
         public string Content { get; set; }
         public int UserId { get; set; }
-
-        [DataType(DataType.DateTime)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime CreationDate { get; set; }
     
         public virtual User User { get; set; }

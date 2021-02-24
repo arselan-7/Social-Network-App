@@ -11,8 +11,7 @@ namespace Test
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,17 +22,12 @@ namespace Test
         }
     
         public int Id { get; set; }
-
-        [Required]
         public string Username { get; set; }
-
-        [Required(ErrorMessage = "Veuillez enter un mot de passe")]
-        [MinLength(6, ErrorMessage = "Veuillez enter un mdp avec minimum 6 caractères")]
         public string Password { get; set; }
-
-        [Required]
         public System.DateTime DateOfBirth { get; set; }
         public string Notes { get; set; }
+        public string FirstName { get; set; }
+        public string LasName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }

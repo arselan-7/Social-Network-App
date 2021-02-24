@@ -30,7 +30,9 @@
     <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-    <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LasName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PostSet">
     <Key>
@@ -116,7 +118,9 @@
           <NavigationProperty Name="Likes" Relationship="Model1.UserLike" FromRole="User" ToRole="Like" />
           <Property Name="Password" Type="String" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
-          <Property Name="Notes" Type="String" Nullable="false" />
+          <Property Name="Notes" Type="String" Nullable="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LasName" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -189,6 +193,8 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LasName" ColumnName="LasName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
