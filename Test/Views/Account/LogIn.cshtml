@@ -1,4 +1,56 @@
-﻿@{
+﻿@*@{
+        Layout = null;
+    }
+
+    @model Test.ViewModels.LoginViewModel
+
+    @{
+        ViewBag.Title = "Login";
+    }
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <h2>Login</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+@{
     Layout = null;
 }
 
@@ -7,45 +59,122 @@
 @{
     ViewBag.Title = "Login";
 }
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
 
-<h2>Login</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Form-v8 by Colorlib</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/sourcesanspro-font.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="~/Content/Login/style.css" />
+</head>
+<body class="form-v8">
+    <div class="page-content">
+        <div class="form-v8-content" style="z-index:999">
+            <div class="form-left" >
+                <img width="350" height="99%" style="opacity:0.4;" src="https://c0.wallpaperflare.com/preview/84/694/443/codes-coding-css-css3.jpg" alt="form"/>
+                <img style="position:absolute; top:45%;right:72%;z-index:9999; background-color:black" src="https://cdn.shopify.com/s/files/1/1522/8788/files/core2_930eea1d-baa1-4abe-a00a-01d8188840a0_150x.png?v=1475730729%201x,%20//cdn.shopify.com/s/files/1/1522/8788/files/core2_930eea1d-baa1-4abe-a00a-01d8188840a0_150x@2x.png?v=1475730729%202x"/>
+                @*<img src="images/form-v8.jpg" alt="form">*@
             </div>
-        </div>
+            <div class="form-right">
+                <div class="tab">
+                    <div class="tab-inner">
+                        <button class="tablinks" onclick="openCity(event, 'sign-in')" id="defaultOpen">Sign In</button>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="tab-inner">
+                        <button class="tablinks" onclick="openCity(event, 'sign-up')">Sign Up</button>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <!-- LOGIN FORM -->
+                @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @class = "form-detail" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="tabcontent" id="sign-in">
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="text" name="username" id="username" class="input-text" required>
+                                <span class="label">Username</span>
+                                <span class="border"></span>
+                            </label>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="password" name="password" id="password" class="input-text" required>
+                                <span class="label">Password</span>
+                                <span class="border"></span>
+                            </label>
+                        </div>
+                        <div class="form-row-last">
+                            <input type="submit" name="register" class="register" value="Sign In">
+                        </div>
+                        
+                        @Html.ValidationSummary(true, "", new { @style = "color:red" })
+                    </div>
+                }
+
+                <form class="form-detail" action="#" method="post">
+                    <div class="tabcontent" id="sign-up">
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="text" name="full_name" id="full_name" class="input-text" required>
+                                <span class="label">Username</span>
+                                <span class="border"></span>
+                            </label>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="text" name="your_email" id="your_email" class="input-text" required>
+                                <span class="label">E-Mail</span>
+                                <span class="border"></span>
+                            </label>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="password" name="password" id="password" class="input-text" required>
+                                <span class="label">Password</span>
+                                <span class="border"></span>
+                            </label>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
+                                <span class="label">Comfirm Password</span>
+                                <span class="border"></span>
+                            </label>
+                        </div>
+                        <div class="form-row-last">
+                            <input type="submit" name="register" class="register" value="Register">
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
-}
+    <script type="text/javascript">
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

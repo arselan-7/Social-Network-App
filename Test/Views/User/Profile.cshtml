@@ -1,5 +1,15 @@
 ﻿@model Tuple<User,List<Test.ViewModels.PostViewModel>>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" integrity="sha256-Z8TW+REiUm9zSQMGZH4bfZi52VJgMqETCbPFlGRB1P8=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" integrity="sha256-zuyRv+YsWwh1XR5tsrZ7VCfGqUmmPmqBjIvJgQWoSDo=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" integrity="sha256-ZvMf9li0M5GGriGUEKn1g6lLwnj5u+ENqCbLM5ItjQ0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" integrity="sha256-JirYRqbf+qzfqVtEE4GETyHlAbiCpC005yBTa4rj6xg=" crossorigin="anonymous"></script>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@*<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+
 <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
     <div class="panel panel-default">
         <div class="panel-body">
@@ -66,7 +76,7 @@
     <!-- Simple post content example. -->
     @foreach (var post in Model.Item2)
     {
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="@string.Concat("post", post.Id)">
             <div class="panel-body">
                 <div class="pull-left">
                     <a href="#">
@@ -87,7 +97,7 @@
                                 <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
                                 <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                <li><a onclick="deletePost(@post.Id)"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
                             </ul>
                         </div>
                     </div>
@@ -111,6 +121,47 @@
     }
     <!-- Simple post content example. -->
 
+    <script type="text/javascript">
+        function deletePost(id) {
+            //alert(id);
+            swal({
+                title: "Are you sure?",
+                text: "Your will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+                function () {
+                    $.ajax({
+                        url: "/Posts/Delete",
+                        data: JSON.stringify({ id: id }),
+                        type: "post",
+                        contentType: 'application/json'
+                    }).done(function (result) {
+                        $("#post"+id).remove();
+                        swal("Deleted!", "The post is successfully deleted.", "success");
+                    }).fail(function () {
+                        swal("OOPS!", "Something went wrong!!!", "error");
+                    });
 
+                    //$.ajax({
+                    //    url: '/Posts/Delete',
+                    //    type: 'post',
+                    //    dataType: 'json',
+                    //    data: JSON.stringify({ id: 1}),
+                    //    contentType: 'application/json',
+                    //    success: function (data) {
+                    //        alert("test");
+                    //    },
+                    //    error: function (data) {
+                    //        alert(data);
+                    //    }
+                    //});
+
+                });
+        }
+    </script>
 
 </div>

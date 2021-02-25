@@ -7,11 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Test;
-using Test.Filters;
 
 namespace Test.Controllers
 {
-    [CustomAuth]
     public class PostsController : Controller
     {
         private Model1Container db = new Model1Container();
@@ -113,13 +111,25 @@ namespace Test.Controllers
 
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = db.PostSet.Find(id);
-            db.PostSet.Remove(post);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                //Delete foreign keys of the selected post first
+                List<Like> likes = db.LikeSet.Where(l => l.PostId == id).ToList();
+                db.LikeSet.RemoveRange(likes);
+
+                //then.. delete the selected post
+                Post post = db.PostSet.Find(id);
+                db.PostSet.Remove(post);
+                db.SaveChanges();
+
+                return Json(new { Success = true });
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         protected override void Dispose(bool disposing)

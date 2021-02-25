@@ -176,6 +176,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\OFL.txt" />
+    <Content Include="Content\Login\sourcesanspro-font.css" />
+    <Content Include="Content\Login\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -200,6 +203,18 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Black.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-BlackItalic.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Bold.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-BoldItalic.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-ExtraLight.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-ExtraLightItalic.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Italic.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Light.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-LightItalic.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Regular.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-SemiBold.ttf" />
+    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-SemiBoldItalic.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -225,31 +240,29 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login2.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
-    <Content Include="Views\Likes\Create.cshtml" />
-    <Content Include="Views\Likes\Delete.cshtml" />
-    <Content Include="Views\Likes\Details.cshtml" />
-    <Content Include="Views\Likes\Edit.cshtml" />
-    <Content Include="Views\Likes\Index.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\Shared\_PostLikes.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Posts\Delete.cshtml" />
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
-    <Content Include="Views\Account\LogIn.cshtml" />
-    <Content Include="Views\Shared\_PostLikes.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Likes\Create.cshtml" />
+    <Content Include="Views\Likes\Delete.cshtml" />
+    <Content Include="Views\Likes\Details.cshtml" />
+    <Content Include="Views\Likes\Edit.cshtml" />
+    <Content Include="Views\Likes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Posts\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
