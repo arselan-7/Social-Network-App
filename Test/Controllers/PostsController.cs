@@ -7,10 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Test;
+using Test.Filters;
+using Test.ViewModels;
 
 namespace Test.Controllers
 {
-    public class PostsController : Controller
+    [CustomAuth]
+    public class PostsController : BaseController
     {
         private Model1Container db = new Model1Container();
 
@@ -50,15 +53,47 @@ namespace Test.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Content,UserId,CreationDate")] Post post)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.PostSet.Add(post);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (!string.IsNullOrEmpty(post.Content))
+                {
+                    Post newPost = new Post { Content = post.Content, UserId = ConnectedUser.Id, CreationDate = DateTime.Now };
 
-            ViewBag.UserId = new SelectList(db.UserSet, "Id", "Username", post.UserId);
-            return View(post);
+                    db.PostSet.Add(newPost);
+                    db.SaveChanges();
+
+                    return Json(new { Success = true });
+                }
+                
+                return HttpNotFound();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddNewPost(int userId, string newPostContent)
+        {
+            try
+            {
+                if (userId == ConnectedUser.Id && !string.IsNullOrEmpty(newPostContent))
+                {
+                    Post newPost = new Post { Content = newPostContent, UserId = userId, CreationDate = DateTime.Now };
+
+                    db.PostSet.Add(newPost);
+                    db.SaveChanges();
+
+                    return Json(new { Success = true });
+                }
+
+                return HttpNotFound();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         // GET: Posts/Edit/5
@@ -81,17 +116,31 @@ namespace Test.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Content,UserId,CreationDate")] Post post)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(int userId, int postId, string newContent)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ConnectedUser.Id == userId && !string.IsNullOrEmpty(newContent))
+                {
+                    Post post = db.PostSet.Find(postId);
+                    if (post == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    post.Content = newContent;
+                    //db.Entry(post).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Json(new { Success = true });
+                }
             }
-            ViewBag.UserId = new SelectList(db.UserSet, "Id", "Username", post.UserId);
-            return View(post);
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+
+            return HttpNotFound();
         }
 
         // GET: Posts/Delete/5
@@ -125,6 +174,38 @@ namespace Test.Controllers
                 db.SaveChanges();
 
                 return Json(new { Success = true });
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        public ActionResult _PostLikes(int userId, string postContent)
+        {
+            try
+            {
+                if (userId == ConnectedUser.Id && !string.IsNullOrEmpty(postContent))
+                {
+                    Post newPost = new Post { Content = postContent, UserId = userId, CreationDate = DateTime.Now };
+
+                    db.PostSet.Add(newPost);
+
+                    db.SaveChanges();
+
+                    var postViewModel = new PostViewModel
+                    {
+                        Id = newPost.Id,
+                        Content = newPost.Content,
+                        CreationDate = newPost.CreationDate,
+                        UserId = newPost.UserId,
+                        User = ConnectedUser,
+                        Likes = newPost.Likes
+                    };
+                    return PartialView(postViewModel);
+                }
+
+                return HttpNotFound();
             }
             catch (Exception ex)
             {

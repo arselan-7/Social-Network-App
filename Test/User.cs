@@ -28,6 +28,7 @@ namespace Test
         public string Notes { get; set; }
         public string FirstName { get; set; }
         public string LasName { get; set; }
+        public string ImageUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }

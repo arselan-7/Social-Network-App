@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,11 +23,12 @@ namespace Test.Controllers
                     User = p.User,
                     Content = p.Content,
                     IsLike = p.Likes
-                .Where(l => l.UserId == ConnectedUser.Id)
-                .FirstOrDefault() == null ? false : true,
+                        .Where(l => l.UserId == ConnectedUser.Id)
+                        .FirstOrDefault() == null ? false : true,
                     Likes = p.Likes,
                     CreationDate = p.CreationDate
                 })
+                .Where(x => x.User.Id != ConnectedUser.Id)
                 .OrderByDescending(d => d.CreationDate)
                 .ToList();
 

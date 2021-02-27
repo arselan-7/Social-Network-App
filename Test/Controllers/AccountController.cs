@@ -60,5 +60,10 @@ namespace Test.Controllers
 
             return View("LogIn");
         }
+
+        public ActionResult SignIn()
+        {
+            return View("SignIn");
+        }
     }
 }

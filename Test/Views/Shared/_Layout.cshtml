@@ -2,98 +2,19 @@
 <html lang="en">
 <head>
     @Styles.Render("~/Content/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/bundles/modernizr")
 
     <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>New d* theme - Profile - Bootsnipp.com</title>
+    <title>Core 2 - Social Network</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-        .mainbody {
-            background: #f0f0f0;
-        }
-        /* Special class on .container surrounding .navbar, used for positioning it into place. */
-        .navbar-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 20;
-            margin-left: -15px;
-            margin-right: -15px;
-        }
 
-            /* Flip around the padding for proper display in narrow viewports */
-            .navbar-wrapper .container {
-                padding-left: 0;
-                padding-right: 0;
-            }
-
-            .navbar-wrapper .navbar {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-        .navbar-content {
-            width: 320px;
-            padding: 15px;
-            padding-bottom: 0px;
-        }
-
-            .navbar-content:before, .navbar-content:after {
-                display: table;
-                content: "";
-                line-height: 0;
-            }
-
-        .navbar-nav.navbar-right:last-child {
-            margin-right: 15px !important;
-        }
-
-        .navbar-footer {
-            background-color: #DDD;
-        }
-
-        .navbar-footer-content {
-            padding: 15px 15px 15px 15px;
-        }
-
-        .dropdown-menu {
-            padding: 0px;
-            overflow: hidden;
-        }
-
-        .brand_network {
-            color: #9D9D9D;
-            float: left;
-            position: absolute;
-            left: 70px;
-            top: 30px;
-            font-size: smaller;
-        }
-
-        .post-content {
-            margin-left: 58px;
-        }
-
-        .badge-important {
-            margin-top: 3px;
-            margin-left: 25px;
-            position: absolute;
-        }
-
-        body {
-            background-color: #e8e8e8;
-        }
-    </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="~/Content/LayoutStyles.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
-    <div class="mainbody container-fluid">
+</head>
+
+
+<body>
+    <div class="mainbody_ container-fluid">
         <div class="row">
             <div class="navbar-wrapper">
                 <div class="container-fluid">
@@ -103,17 +24,17 @@
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                     <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="./ORqmj" style="margin-right:-8px; margin-top:-5px;">
-                                    <img alt="Brand" src="https://lut.im/7trApsDX08/GeilMRp1FIm4f2p7.png" width="30px" height="30px">
+                                <a class="navbar-brand" href="@Url.Action("Index","Home")" style="margin-right:-8px; margin-top:-5px;">
+                                    <img alt="Brand" src="~/Medias/core2.png" width="120" height="40">
                                 </a>
-                                <a class="navbar-brand" href="./ORqmj">Project*</a>
-                                <i class="brand_network"><small><small>diaspora* Network</small></small></i>
+                                <a class="navbar-brand" href="@Url.Action("Index","Home")">Core Network</a>
+                                <i class="brand_network"><small><small>more than a social network</small></small></i>
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="./ORqmj">Stream</a></li>
+                                    <li><a href="#">Live</a></li>
                                     <li><a href="/">Accueil</a></li>
-                                    <li><span class="badge badge-important">2</span><a href="#"><i class="fa fa-bell-o fa-lg" aria-hidden="true"></i></a></li>
+                                    <li><span class="badge badge-important" style="background-color:red">2</span><a href="#"><i class="fa fa-bell-o fa-lg" aria-hidden="true"></i></a></li>
                                     <li><a href="#"><i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i></a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
@@ -123,7 +44,7 @@
                                                 <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive img-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
                                             </span>
                                             <span class="user-name">
-                                                John Doe
+                                                @(((User)Session[Test.Models.ConnectedUserSession.UserSession]).FirstName + " " + ((User)Session[Test.Models.ConnectedUserSession.UserSession]).LasName)
                                             </span>
                                             <b class="caret"></b>
                                         </a>
@@ -134,7 +55,7 @@
                                                         <div class="col-md-5">
                                                             <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
                                                             <p class="text-center small">
-                                                                <a href="./3X6zm">Change Photo</a>
+                                                                <a href="#">Change Photo</a>
                                                             </p>
                                                         </div>
                                                         <div class="col-md-7">
@@ -172,14 +93,14 @@
                     </div>
                 </div>
             </div>
-            <div style="padding-top:10px;"> </div>
-
-            <div>
-                @RenderBody()
-            </div>
+            <div style="padding-top:50px;"> </div>
         </div>
     </div>
-    </body>
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
 </html>
 
     <script type="text/javascript">
@@ -195,3 +116,4 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous"></script>
