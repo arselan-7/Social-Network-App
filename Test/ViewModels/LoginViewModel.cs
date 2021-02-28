@@ -8,10 +8,12 @@ namespace Test.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Please Enter User Name")]
-        [Display(Name = "User Name")]
+        [Required]
+        [Display(Name = "Nom d'utilisateur")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "Please Enter Password")]
+
+        [Required]
+        [Display(Name = "Mot de passe")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

@@ -41,7 +41,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                                <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive img-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
+                                                <img src="@(((User)Session[Test.Models.ConnectedUserSession.UserSession]).ImageUrl)" class="img-responsive img-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
                                             </span>
                                             <span class="user-name">
                                                 @(((User)Session[Test.Models.ConnectedUserSession.UserSession]).FirstName + " " + ((User)Session[Test.Models.ConnectedUserSession.UserSession]).LasName)
@@ -53,15 +53,15 @@
                                                 <div class="navbar-content">
                                                     <div class="row">
                                                         <div class="col-md-5">
-                                                            <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
+                                                            <img src="@(((User)Session[Test.Models.ConnectedUserSession.UserSession]).ImageUrl)" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
                                                             <p class="text-center small">
                                                                 <a href="#">Change Photo</a>
                                                             </p>
                                                         </div>
                                                         <div class="col-md-7">
-                                                            <span>John Doe</span>
+                                                            <span>@(((User)Session[Test.Models.ConnectedUserSession.UserSession]).FirstName + " " + ((User)Session[Test.Models.ConnectedUserSession.UserSession]).LasName)</span>
                                                             <p class="text-muted small">
-                                                                example@pods.tld
+                                                                example@core2.fr
                                                             </p>
                                                             <div class="divider">
                                                             </div>

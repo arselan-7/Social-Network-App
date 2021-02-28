@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@if (Session[Test.Models.ConnectedUserSession.UserSession] == null)
+{
+    Layout = null;
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+}
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">

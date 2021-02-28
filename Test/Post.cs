@@ -11,7 +11,8 @@ namespace Test
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,11 @@ namespace Test
         }
     
         public int Id { get; set; }
+        [Required(ErrorMessage = "Ce champs est obligatoire*")]
         public string Content { get; set; }
         public int UserId { get; set; }
+        [Required(ErrorMessage = "Ce champs est obligatoire*")]
+        [DataType(DataType.DateTime)]
         public System.DateTime CreationDate { get; set; }
     
         public virtual User User { get; set; }

@@ -1,180 +1,154 @@
-﻿@*@{
-        Layout = null;
-    }
-
-    @model Test.ViewModels.LoginViewModel
-
-    @{
-        ViewBag.Title = "Login";
-    }
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-    <h2>Login</h2>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-
-@{
+﻿@{
     Layout = null;
 }
 
-@model Test.ViewModels.LoginViewModel
+@model Tuple<Test.ViewModels.LoginViewModel, Test.ViewModels.RegisterViewModel>
 
-@{
-    ViewBag.Title = "Login";
-}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Form-v8 by Colorlib</title>
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- Font-->
-    <link rel="stylesheet" type="text/css" href="~/Content/Login/sourcesanspro-font.css">
-    <!-- Main Style Css -->
-    <link rel="stylesheet" href="~/Content/Login/style.css" />
-</head>
-<body class="form-v8">
-    <div class="page-content">
-        <div class="form-v8-content" style="z-index:999">
-            <div class="form-left" >
-                <img width="350" height="99%" style="opacity:0.4;" src="https://c0.wallpaperflare.com/preview/84/694/443/codes-coding-css-css3.jpg" alt="form"/>
-                <img style="position:absolute; top:45%;right:72%;z-index:9999; background-color:black" src="https://cdn.shopify.com/s/files/1/1522/8788/files/core2_930eea1d-baa1-4abe-a00a-01d8188840a0_150x.png?v=1475730729%201x,%20//cdn.shopify.com/s/files/1/1522/8788/files/core2_930eea1d-baa1-4abe-a00a-01d8188840a0_150x@2x.png?v=1475730729%202x"/>
-                @*<img src="images/form-v8.jpg" alt="form">*@
-            </div>
-            <div class="form-right">
-                <div class="tab">
-                    <div class="tab-inner">
-                        <button class="tablinks" onclick="openCity(event, 'sign-in')" id="defaultOpen">Sign In</button>
-                    </div>
+    <title>Core 2 - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/Login-Register-Styles.css" />
 
-                    <div class="tab-inner">
-                        <button class="tablinks" onclick="openCity(event, 'sign-up')">Sign Up</button>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+
+<body>
+    <div style="text-align:center">
+        <img src="~/Medias/logo-core2.jpg"/>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-login">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="active" id="login-form-link">Login</a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#" id="register-form-link">Register</a>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @id = "login-form", @style = "display:block;" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Item1.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username", @tabindex = "1", @id = "username" } })
+                                        @Html.ValidationMessageFor(model => model.Item1.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Item1.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @tabindex = "2", @id = "password" } })
+                                        @Html.ValidationMessageFor(model => model.Item1.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                        <label for="remember"> Remember Me</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "register-form", @style = "display:none;" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @*<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">*@
+                                        @Html.EditorFor(model => model.Item2.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Prénom", @tabindex = "1", @id = "FirstName" } })
+                                        @Html.ValidationMessageFor(model => model.Item2.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Item2.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nom", @tabindex = "2", @id = "LastName" } })
+                                        @Html.ValidationMessageFor(model => model.Item2.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Item2.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nom d'utilisateur", @tabindex = "3", @id = "UserName" } })
+                                        @Html.ValidationMessageFor(model => model.Item2.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="date" name="Item2.DateOfBirth" id="DateOfBirth" tabindex="4" class="form-control" placeholder="Date de naissance">
+                                        @Html.ValidationMessageFor(model => model.Item2.DateOfBirth, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Item2.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mot de passe", @tabindex = "5", @id = "Password" } })
+                                        @Html.ValidationMessageFor(model => model.Item2.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Item2.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirmation mot de passe", @tabindex = "6", @id = "ConfirmPassword" } })
+                                        @Html.ValidationMessageFor(model => model.Item2.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="Item2.Notes" rows="3" id="Notes" tabindex="7" placeholder="Bio" style="resize:none"></textarea>
+                                        @Html.ValidationMessageFor(model => model.Item2.Notes, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="register-submit" id="register-submit" tabindex="8" class="form-control btn btn-register" value="Register Now">
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- LOGIN FORM -->
-                @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @class = "form-detail" }))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="tabcontent" id="sign-in">
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="text" name="username" id="username" class="input-text" required>
-                                <span class="label">Username</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="password" name="password" id="password" class="input-text" required>
-                                <span class="label">Password</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div class="form-row-last">
-                            <input type="submit" name="register" class="register" value="Sign In">
-                        </div>
-                        
-                        @Html.ValidationSummary(true, "", new { @style = "color:red" })
-                    </div>
-                }
-
-                <form class="form-detail" action="#" method="post">
-                    <div class="tabcontent" id="sign-up">
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="text" name="full_name" id="full_name" class="input-text" required>
-                                <span class="label">Username</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="text" name="your_email" id="your_email" class="input-text" required>
-                                <span class="label">E-Mail</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="password" name="password" id="password" class="input-text" required>
-                                <span class="label">Password</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
-                                <span class="label">Comfirm Password</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div class="form-row-last">
-                            <input type="submit" name="register" class="register" value="Register">
-                        </div>
-                    </div>
-                </form>
-
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(function () {
+
+            $('#login-form-link').click(function (e) {
+                $("#login-form").delay(100).fadeIn(100);
+                $("#register-form").fadeOut(100);
+                $('#register-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+            $('#register-form-link').click(function (e) {
+                $("#register-form").delay(100).fadeIn(100);
+                $("#login-form").fadeOut(100);
+                $('#login-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+
+        });
+
     </script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 </html>

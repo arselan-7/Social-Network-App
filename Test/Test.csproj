@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -175,13 +176,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\LayoutStyles.css" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\OFL.txt" />
-    <Content Include="Content\Login\sourcesanspro-font.css" />
-    <Content Include="Content\Login\style.css" />
+    <Content Include="Content\Login-Register-Styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Medias\logo-core2.jpg" />
     <Content Include="Medias\core2.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -201,18 +201,6 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Black.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-BlackItalic.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Bold.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-BoldItalic.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-ExtraLight.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-ExtraLightItalic.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Italic.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Light.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-LightItalic.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-Regular.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-SemiBold.ttf" />
-    <Content Include="Content\Login\fonts\Source_Sans_Pro\SourceSansPro-SemiBoldItalic.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -250,7 +238,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
-    <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Shared\_PostLikes.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Posts\Delete.cshtml" />
@@ -270,7 +257,7 @@
     <Content Include="Views\Shared\NotFound_404.cshtml" />
     <Content Include="Views\Shared\ServerError_500.cshtml" />
     <Content Include="Views\Posts\_SSS.cshtml" />
-    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
