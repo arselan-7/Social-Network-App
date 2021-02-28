@@ -40,19 +40,20 @@ namespace Test.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Invalid User Name or Password");
-                        return View(model);
+                        ViewBag.ErrorForm = "LoginError";
+                        ModelState.AddModelError("", "Nom d'utilisateur ou mot de passe incorrect");
+                        return View(new Tuple<LoginViewModel,RegisterViewModel>(model, new RegisterViewModel()));
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    ModelState.AddModelError("", "Problem occured... try later");
-                    return View(model);
+                    ModelState.AddModelError("", "Un problème est survenu... Veuillez réssayer plus tard");
+                    return View(new Tuple<LoginViewModel, RegisterViewModel>(model, new RegisterViewModel()));
                 }
             }
             else
             {
-                return View(model);
+                return View(new Tuple<LoginViewModel, RegisterViewModel>(model, new RegisterViewModel()));
             }
         }
 
@@ -83,16 +84,18 @@ namespace Test.Controllers
                     Session[ConnectedUserSession.UserSession] = newUser;
                     return RedirectToAction("Index", "Home");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Console.WriteLine(ex.Message);
-                    ModelState.AddModelError("", "Problem occured... try later");
-                    return View(model);
+                    ViewBag.ErrorForm = "RegisterError";
+                    ModelState.AddModelError("", "Un problème est survenu... Veuillez réssayer plus tard");
+                    return View("LogIn",new Tuple<LoginViewModel, RegisterViewModel>(new LoginViewModel(), model));
                 }
             }
             else
             {
-                return View(model);
+                ViewBag.ErrorForm = "RegisterError";
+                ModelState.AddModelError("", "Un problème est survenu... Veuillez réssayer plus tard");
+                return View("LogIn",new Tuple<LoginViewModel, RegisterViewModel>(new LoginViewModel(), model));
             }
         }
 

@@ -44,13 +44,13 @@ namespace Test.Controllers
 
                 if (user == null)
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("NotFound","Error");
                 }
                 return View(new Tuple<User, List<PostViewModel>>(user, connectedUserPosts));
             }
             catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ServerError", "Error");
             }
         }
     }

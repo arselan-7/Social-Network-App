@@ -8,7 +8,7 @@
 @Scripts.Render("~/bundles/modernizr")
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr-fr">
 <head>
     <meta charset="utf-8">
     <title>Core 2 - Login</title>
@@ -18,11 +18,12 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
 </head>
 
 <body>
     <div style="text-align:center">
-        <img src="~/Medias/logo-core2.jpg"/>
+        <img src="~/Medias/logo-core2.jpg" />
     </div>
     <div class="container">
         <div class="row">
@@ -46,7 +47,11 @@
                                 {
                                     @Html.AntiForgeryToken()
 
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    if (ViewBag.ErrorForm == "LoginError")
+                                    {
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    }
+
                                     <div class="form-group">
                                         @Html.EditorFor(model => model.Item1.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username", @tabindex = "1", @id = "username" } })
                                         @Html.ValidationMessageFor(model => model.Item1.UserName, "", new { @class = "text-danger" })
@@ -81,7 +86,13 @@
                                 {
                                     @Html.AntiForgeryToken()
 
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    if (ViewBag.ErrorForm == "RegisterError")
+                                    {
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    }
+
+                                    @Html.HiddenFor(m => m.Item2.ImageUrl)
+
                                     <div class="form-group">
                                         @*<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">*@
                                         @Html.EditorFor(model => model.Item2.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Prénom", @tabindex = "1", @id = "FirstName" } })
@@ -149,6 +160,20 @@
 
         });
 
+    </script>
+
+    <script type="text/javascript">
+        var x = '@ViewBag.ErrorForm';
+
+        if (x == 'RegisterError') {
+            $(document).ready(function(e) {
+                $("#register-form").delay(100).fadeIn(100);
+                $("#login-form").fadeOut(100);
+                $('#login-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+        }
     </script>
 </body>
 </html>

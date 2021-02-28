@@ -31,6 +31,7 @@ namespace Test.ViewModels
 
         [Required]
         [Display(Name = "Mot de passe")]
+        [MinLength(6, ErrorMessage = "Le mot de passe ne doit pas être moins de 6 caractères")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         
