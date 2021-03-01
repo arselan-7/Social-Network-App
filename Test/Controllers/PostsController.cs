@@ -213,6 +213,28 @@ namespace Test.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult PostLikers(int id)
+        {
+            try
+            {
+                var likes = db.PostSet.Where(p => p.Id == id).FirstOrDefault().Likes.ToList();
+                var likersList = new List<PostLikersViewModel>();
+
+                foreach (var like in likes)
+                {
+                    var user = db.UserSet.Find(like.UserId);
+                    likersList.Add(new PostLikersViewModel { FullName = string.Format("{0} {1}",user.FirstName, user.LasName), ImageUrl = user.ImageUrl });
+                }
+
+                return Json( likersList );
+            }
+            catch (Exception)
+            {
+                return Json(null);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

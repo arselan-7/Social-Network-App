@@ -1,7 +1,7 @@
 ﻿@model Test.ViewModels.PostViewModel
 
 <div class="pull-right btn-group-xs" data-total='@Model.Id'>
-    <a class="btn btn-default btn-xs" onclick="React(@(Model.IsLike? "true" : "false"), @Model.Id)" @(Model.IsLike ? "style=color:red" : "")>
+    <a class="btn btn-default btn-xs likeButton" onmouseenter="checkForLikers(@Model.Id,@Model.Likes.Count)" onmouseleave="resetTimer()" onclick="React(@(Model.IsLike? "true" : "false"), @Model.Id)" @(Model.IsLike ? "style=color:red" : "")>
         <i class="fa fa-heart" aria-hidden="true"></i> @(Model.IsLike ? "Liked " + ((Model.Likes.Count > 0 ? "("+ Model.Likes.Count.ToString() + ")" : ""))  : "Like " + ((Model.Likes.Count > 0 ? "(" + Model.Likes.Count.ToString() + ")" : "")) )
     </a>
     <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>

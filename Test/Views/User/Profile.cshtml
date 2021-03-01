@@ -27,7 +27,6 @@
                 <div class="media-body">
                     <hr>
                     <h3><strong>Bio</strong></h3>
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>*@
                     <p>@Model.Item1.Notes</p>
                     <hr>
                     <h3><strong>Location</strong></h3>
@@ -37,7 +36,6 @@
                     <p>Unknown</p>
                     <hr>
                     <h3><strong>Birthday</strong></h3>
-                    @*<p>January 01 1901</p>*@
                     <p>@Model.Item1.DateOfBirth.ToLongDateString()</p>
                 </div>
             </div>
@@ -48,7 +46,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <span>
-                <h1 class="panel-title pull-left" style="font-size:30px;"> @Model.Item1.FirstName @Model.Item1.LasName<small> example@core2.fr</small> <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="John Doe is sharing with you"></i></h1>
+                <h1 class="panel-title pull-left" style="font-size:30px;"> @Model.Item1.FirstName @Model.Item1.LasName<small> example@core2.fr</small> <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Verifié"></i></h1>
                 <div class="dropdown pull-right">
                     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Friends
@@ -90,7 +88,7 @@
             <h4><a href="#" style="text-decoration:none;"><strong>@@@Model.Item1.Username</strong></a></h4>
             <hr>
             <div class="post-content">
-                <textarea id="addPostTextarea" name="Content" style="resize:none" placeholder="Partager une nouvelle publication" rows="5" cols="100"></textarea>
+                <textarea id="addPostTextarea" title="Partager une nouvelle publication" name="Content" style="resize:none" placeholder="Partager une nouvelle publication" rows="5" cols="100"></textarea>
             </div>
             <hr>
             <div>
@@ -372,3 +370,62 @@
     </script>
 
 </div>
+
+<script type="text/javascript">
+
+    function checkForLikers(postId, postLikes) {
+
+        if (postLikes > 0) {
+            $(this).data('timeout', setTimeout(function () {
+
+                $.ajax({
+                    url: "/Posts/PostLikers/",
+                    data: { id: postId },
+                    type: "Post"
+                }).done(function (likersList) {
+                    console.log("ajax done");
+                    fillTableWithLikers(likersList);
+                }).fail(function () {
+                    alert("Something Went Wrong.");
+                });
+
+            }, 2000));
+        }
+    }
+
+    function resetTimer() {
+        clearTimeout($(this).data('timeout'));
+    }
+
+    function fillTableWithLikers(likersList) {
+
+        console.log(likersList);
+
+        if (likersList.length > 0) {
+            var div = document.createElement('div');
+            var table = document.createElement('table');
+
+            for (var i = 0; i < likersList.length; i++) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th');
+                var name = document.createTextNode(likersList[i].FullName);
+                th.appendChild(name);
+                tr.appendChild(th);
+                table.appendChild(tr);
+            }
+
+            div.appendChild(table);
+            div.id = "likersDiv";
+            div.style = "border: 1px solid trasnparent;width: 100%;height: 150px;overflow: auto;";
+            table.classList.add('table');
+            table.style = "border: 1px solid black;margin-right: 20px;margin-bottom:1px!important;font-size:15px;margin-top:15px;border:border-collapse;";
+
+            //Show list of post likers in the popup
+            swal({
+                title: 'Utilisateurs ayant ❤️ ce post',
+                text: div.innerHTML,
+                html: true
+            })
+        }
+    }
+</script>

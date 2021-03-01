@@ -1,8 +1,22 @@
 ﻿@model List<Test.ViewModels.PostViewModel>
 
+
+<!-- IMPORT SWEET ALERT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" integrity="sha256-Z8TW+REiUm9zSQMGZH4bfZi52VJgMqETCbPFlGRB1P8=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" integrity="sha256-zuyRv+YsWwh1XR5tsrZ7VCfGqUmmPmqBjIvJgQWoSDo=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" integrity="sha256-ZvMf9li0M5GGriGUEKn1g6lLwnj5u+ENqCbLM5ItjQ0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" integrity="sha256-JirYRqbf+qzfqVtEE4GETyHlAbiCpC005yBTa4rj6xg=" crossorigin="anonymous"></script>
+
+
 <style>
     .notifyjs-corner {
         top: 70px !important;
+    }
+
+    #likersDiv table th {
+        border: 1px solid black;
+        padding: 5px;
     }
 </style>
 
@@ -67,8 +81,6 @@
 
     function React(isLiked, postId) {
 
-        console.log("is liked => " + isLiked);
-
         if (isLiked == true) {
             $.ajax({
                 url: "/Home/DislikePost/",
@@ -76,7 +88,7 @@
                 type: "Post"
             }).done(function (partialViewResult) {
                 $(String.prototype.concat("#postLikes", postId)).html(partialViewResult);
-            }).error(function () {
+            }).fail(function () {
                 alert("Something Went Wrong.");
             });
         } else if (isLiked == false) {
@@ -87,7 +99,7 @@
                 type: "Post"
             }).done(function (partialViewResult) {
                 $(String.prototype.concat("#postLikes", postId)).html(partialViewResult);
-            }).error(function () {
+            }).fail(function () {
                 alert("Something Went Wrong.");
             });
         }
@@ -108,4 +120,60 @@
         );
     }
 
+</script>
+
+
+<script type="text/javascript">
+
+    function checkForLikers(postId, postLikes) {
+
+        if (postLikes > 0) {
+            $(this).data('timeout', setTimeout(function () {
+
+                $.ajax({
+                    url: "/Posts/PostLikers/",
+                    data: { id: postId },
+                    type: "Post"
+                }).done(function (likersList) {
+                    console.log("ajax done");
+                    fillTableWithLikers(likersList);
+                }).fail(function () {
+                    alert("Something Went Wrong.");
+                });
+
+            }, 2000));
+        }
+    }
+
+    function resetTimer() {
+        clearTimeout($(this).data('timeout'));
+    }
+
+    function fillTableWithLikers(likersList) {
+
+        console.log("fillTableWithLikers");
+
+        if (likersList.length > 0) {
+            var div = document.createElement('div');
+            var table = document.createElement('table');
+
+            for (var i = 0; i < likersList.length; i++) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th');
+                var name = document.createTextNode(likersList[i].FullName);
+                th.appendChild(name);
+                tr.appendChild(th);
+                table.appendChild(tr);
+            }
+
+            div.appendChild(table);
+            div.id = "likersDiv";
+            div.style = "border: 1px solid trasnparent;width: 100%;height: 150px!important;overflow: auto;";
+            table.classList.add('table');
+            table.style = "border: 1px solid black;margin-right: 20px;margin-bottom:1px!important;font-size:15px;margin-top:15px;border:border-collapse;"
+
+            //Show list of post likers in the popup
+            swal({ title: "Utilisateurs ayant ❤️ ce post", text: div.innerHTML, html:true });
+        }
+    }
 </script>
